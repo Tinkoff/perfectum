@@ -1,0 +1,19 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    ],
+    "plugins": ["@typescript-eslint"],
+    "parserOptions": {
+        "project": "./tsconfig.json",
+        "sourceType": "module",
+        "ecmaVersion": 2019
+    },
+    "rules": {
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-use-before-define": ["error", { "functions": false }]
+    }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "@perfectum/client",
+  "version": "1.0.0",
+  "description": "Library for measuring client performance metrics",
+  "author": "Zakharov Vladislav <wwzakharow@gmail.com>",
+  "license": "Apache-2.0",
+  "main": "lib/index.cjs.min.js",
+  "iife": "lib/index.iife.min.js",
+  "module": "lib/index.es.min.js",
+  "typings": "lib/typings/index.d.ts",
+  "scripts": {
+    "prebuild": "rimraf lib",
+    "build": "tsc && rollup --config",
+    "postbuild": "rimraf lib/transpiled",
+    "test": "jest",
+    "lint": "lint-ts",
+    "lint-staged": "lint-staged",
+    "lint-ts": "eslint 'src/**/*.ts'"
+  },
+  "devDependencies": {
+    "rollup": "1.31.1",
+    "rollup-plugin-node-resolve": "5.2.0",
+    "rollup-plugin-size-snapshot": "0.11.0",
+    "rollup-plugin-sourcemaps": "0.5.0",
+    "rollup-plugin-terser": "5.2.0"
+  },
+  "files": [
+    "lib"
+  ]
+}

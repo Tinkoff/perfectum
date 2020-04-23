@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "es5",
+    "rootDir": "./src",
+    "incremental": true,
+    "outDir": "./lib/transpiled",
+    "declarationDir": "./lib/typings",
+    "tsBuildInfoFile": "./lib/tsconfig.tsbuildinfo"
+  },
+  "exclude": [
+    "**/__tests__/**/*"
+  ]
+}

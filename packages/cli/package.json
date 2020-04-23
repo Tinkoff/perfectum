@@ -1,0 +1,38 @@
+{
+  "name": "@perfectum/cli",
+  "version": "1.0.0",
+  "description": "Command line interface for Perfectum performance tools",
+  "author": "Zakharov Vladislav <wwzakharow@gmail.com>",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "typings": "lib/typings/index.d.ts",
+  "scripts": {
+    "prebuild": "rimraf lib",
+    "build": "tsc -b",
+    "lint": "lint-ts",
+    "lint-staged": "lint-staged",
+    "lint-ts": "eslint 'src/**/*.ts'"
+  },
+  "bin": {
+    "perfectum": "bin/cli"
+  },
+  "dependencies": {
+    "@perfectum/synthetic": "1.0.0",
+    "clear": "0.1.0",
+    "deepmerge": "4.2.2",
+    "figlet": "1.3.0",
+    "kleur": "3.0.3",
+    "node-emoji": "1.10.0",
+    "yargs": "15.3.1",
+    "yargs-parser": "18.1.2"
+  },
+  "devDependencies": {
+    "@types/clear": "0.1.0",
+    "@types/figlet": "1.2.0",
+    "@types/node-emoji": "1.8.1",
+    "@types/yargs": "15.0.4"
+  },
+  "files": [
+    "lib"
+  ]
+}

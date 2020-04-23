@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "incremental": true,
+    "module": "commonjs",
+    "rootDir": "./src",
+    "outDir": "./lib",
+    "declarationDir": "./lib/typings",
+    "tsBuildInfoFile": "./lib/tsconfig.tsbuildinfo"
+  },
+  "exclude": [
+    "**/*.test.ts",
+    "lib"
+  ],
+  "references": [
+    {
+      "path": "../synthetic"
+    }
+  ]
+}

@@ -1,0 +1,595 @@
+{
+    "extends": "../../perfectum.json",
+    "client": {
+        "urls": {
+            "main": "http://example.com/",
+            "profile": "http://example.com/profile/"
+        },
+        "budgets": [
+            {
+                "url": "main",
+                "largest-contentful-paint": {
+                    "mobile": {
+                        "target": 3150,
+                        "current": 3450
+                    },
+                    "desktop": {
+                        "target": 2350,
+                        "current": 2750
+                    }
+                },
+                "first-contentful-paint": {
+                    "mobile": {
+                        "target": 1950,
+                        "current": 2250
+                    },
+                    "desktop": {
+                        "target": 1750,
+                        "current": 2050
+                    }
+                },
+                "first-paint": {
+                    "mobile": {
+                        "target": 1850,
+                        "current": 2150
+                    },
+                    "desktop": {
+                        "target": 1450,
+                        "current": 1750
+                    }
+                },
+                "first-input-delay": {
+                    "mobile": {
+                        "target": 35,
+                        "current": 50
+                    },
+                    "desktop": {
+                        "target": 15,
+                        "current": 25
+                    }
+                },
+                "download-document-time": {
+                    "mobile": {
+                        "target": 1050,
+                        "current": 1350
+                    },
+                    "desktop": {
+                        "target": 750,
+                        "current": 1000
+                    }
+                },
+                "server-response-time": {
+                    "mobile": {
+                        "target": 550,
+                        "current": 700
+                    },
+                    "desktop": {
+                        "target": 500,
+                        "current": 600
+                    }
+                }
+            },
+            {
+                "url": "profile",
+                "largest-contentful-paint": {
+                    "mobile": {
+                        "target": 3650,
+                        "current": 3950
+                    },
+                    "desktop": {
+                        "target": 2950,
+                        "current": 3250
+                    }
+                },
+                "first-contentful-paint": {
+                    "mobile": {
+                        "target": 2650,
+                        "current": 2950
+                    },
+                    "desktop": {
+                        "target": 2350,
+                        "current": 2650
+                    }
+                },
+                "first-paint": {
+                    "mobile": {
+                        "target": 2350,
+                        "current": 2650
+                    },
+                    "desktop": {
+                        "target": 2150,
+                        "current": 2450
+                    }
+                },
+                "first-input-delay": {
+                    "mobile": {
+                        "target": 50,
+                        "current": 120
+                    },
+                    "desktop": {
+                        "target": 15,
+                        "current": 15
+                    }
+                },
+                "download-document-time": {
+                    "mobile": {
+                        "target": 2150,
+                        "current": 2450
+                    },
+                    "desktop": {
+                        "target": 1850,
+                        "current": 2150
+                    }
+                },
+                "server-response-time": {
+                    "mobile": {
+                        "target": 850,
+                        "current": 1050
+                    },
+                    "desktop": {
+                        "target": 850,
+                        "current": 1050
+                    }
+                }
+            }
+        ]
+    },
+    "synthetic": {
+        "urls": {
+            "main": "http://localhost:4100/",
+            "profile": "http://localhost:4100/profile/"
+        },
+        "numberOfAuditRuns": 3,
+        "buildProjectTimeout": 5,
+        "startProjectTimeout": 5,
+        "buildProjectCommand": "yarn run build",
+        "startProjectCommand": "yarn run start",
+        "authenticationScriptPath": "./auth-script.ts",
+        "buildProjectCompleteStringPattern": "The project was built",
+        "startProjectCompleteStringPattern": "You can now view example in the browser",
+        "budgets": [
+            {
+                "url": "main",
+                "first-contentful-paint": {
+                    "mobile": {
+                        "target": 1650,
+                        "current": 1950
+                    },
+                    "desktop": {
+                        "target": 1350,
+                        "current": 1650
+                    }
+                },
+                "max-potential-fid": {
+                    "mobile": {
+                        "target": 115,
+                        "current": 200
+                    },
+                    "desktop": {
+                        "target": 85,
+                        "current": 150
+                    }
+                },
+                "interactive": {
+                    "mobile": {
+                        "target": 2750,
+                        "current": 3050
+                    },
+                    "desktop": {
+                        "target": 2150,
+                        "current": 2450
+                    }
+                },
+                "total-blocking-time": {
+                    "mobile": {
+                        "target": 120,
+                        "current": 200
+                    },
+                    "desktop": {
+                        "target": 120,
+                        "current": 200
+                    }
+                },
+                "resource-sizes": {
+                    "script": {
+                        "mobile": {
+                            "target": 1000,
+                            "current": 1235
+                        },
+                        "desktop": {
+                            "target": 1000,
+                            "current": 1275
+                        }
+                    },
+                    "stylesheet": {
+                        "mobile": {
+                            "target": 95,
+                            "current": 125
+                        },
+                        "desktop": {
+                            "target": 85,
+                            "current": 130
+                        }
+                    },
+                    "document": {
+                        "mobile": {
+                            "target": 90,
+                            "current": 90
+                        },
+                        "desktop": {
+                            "target": 90,
+                            "current": 90
+                        }
+                    },
+                    "font": {
+                        "mobile": {
+                            "target": 120,
+                            "current": 160
+                        },
+                        "desktop": {
+                            "target": 120,
+                            "current": 160
+                        }
+                    },
+                    "image": {
+                        "mobile": {
+                            "target": 500,
+                            "current": 740
+                        },
+                        "desktop": {
+                            "target": 300,
+                            "current": 415
+                        }
+                    },
+                    "media": {
+                        "mobile": {
+                            "target": 0,
+                            "current": 0
+                        },
+                        "desktop": {
+                            "target": 0,
+                            "current": 0
+                        }
+                    },
+                    "other": {
+                        "mobile": {
+                            "target": 50,
+                            "current": 50
+                        },
+                        "desktop": {
+                            "target": 40,
+                            "current": 40
+                        }
+                    },
+                    "total": {
+                        "mobile": {
+                            "target": 2450,
+                            "current": 2800
+                        },
+                        "desktop": {
+                            "target": 2150,
+                            "current": 2450
+                        }
+                    }
+                },
+                "resource-requests": {
+                    "script": {
+                        "mobile": {
+                            "target": 20,
+                            "current": 25
+                        },
+                        "desktop": {
+                            "target": 20,
+                            "current": 25
+                        }
+                    },
+                    "stylesheet": {
+                        "mobile": {
+                            "target": 5,
+                            "current": 9
+                        },
+                        "desktop": {
+                            "target": 5,
+                            "current": 9
+                        }
+                    },
+                    "document": {
+                        "mobile": {
+                            "target": 3,
+                            "current": 3
+                        },
+                        "desktop": {
+                            "target": 3,
+                            "current": 3
+                        }
+                    },
+                    "font": {
+                        "mobile": {
+                            "target": 5,
+                            "current": 6
+                        },
+                        "desktop": {
+                            "target": 5,
+                            "current": 6
+                        }
+                    },
+                    "image": {
+                        "mobile": {
+                            "target": 30,
+                            "current": 35
+                        },
+                        "desktop": {
+                            "target": 30,
+                            "current": 35
+                        }
+                    },
+                    "media": {
+                        "mobile": {
+                            "target": 0,
+                            "current": 0
+                        },
+                        "desktop": {
+                            "target": 0,
+                            "current": 0
+                        }
+                    },
+                    "other": {
+                        "mobile": {
+                            "target": 30,
+                            "current": 30
+                        },
+                        "desktop": {
+                            "target": 35,
+                            "current": 35
+                        }
+                    },
+                    "total": {
+                        "mobile": {
+                            "target": 90,
+                            "current": 100
+                        },
+                        "desktop": {
+                            "target": 100,
+                            "current": 110
+                        }
+                    }
+                }
+            },
+            {
+                "url": "profile",
+                "first-contentful-paint": {
+                    "mobile": {
+                        "target": 2650,
+                        "current": 2950
+                    },
+                    "desktop": {
+                        "target": 2350,
+                        "current": 2650
+                    }
+                },
+                "max-potential-fid": {
+                    "mobile": {
+                        "target": 85,
+                        "current": 150
+                    },
+                    "desktop": {
+                        "target": 65,
+                        "current": 130
+                    }
+                },
+                "interactive": {
+                    "mobile": {
+                        "target": 3850,
+                        "current": 4150
+                    },
+                    "desktop": {
+                        "target": 3450,
+                        "current": 3750
+                    }
+                },
+                "total-blocking-time": {
+                    "mobile": {
+                        "target": 100,
+                        "current": 150
+                    },
+                    "desktop": {
+                        "target": 100,
+                        "current": 150
+                    }
+                },
+                "resource-sizes": {
+                    "script": {
+                        "mobile": {
+                            "target": 1100,
+                            "current": 1300
+                        },
+                        "desktop": {
+                            "target": 1100,
+                            "current": 1300
+                        }
+                    },
+                    "stylesheet": {
+                        "mobile": {
+                            "target": 110,
+                            "current": 150
+                        },
+                        "desktop": {
+                            "target": 110,
+                            "current": 150
+                        }
+                    },
+                    "document": {
+                        "mobile": {
+                            "target": 300,
+                            "current": 385
+                        },
+                        "desktop": {
+                            "target": 300,
+                            "current": 385
+                        }
+                    },
+                    "font": {
+                        "mobile": {
+                            "target": 100,
+                            "current": 115
+                        },
+                        "desktop": {
+                            "target": 100,
+                            "current": 115
+                        }
+                    },
+                    "image": {
+                        "mobile": {
+                            "target": 50,
+                            "current": 65
+                        },
+                        "desktop": {
+                            "target": 60,
+                            "current": 65
+                        }
+                    },
+                    "media": {
+                        "mobile": {
+                            "target": 0,
+                            "current": 0
+                        },
+                        "desktop": {
+                            "target": 0,
+                            "current": 0
+                        }
+                    },
+                    "other": {
+                        "mobile": {
+                            "target": 15,
+                            "current": 15
+                        },
+                        "desktop": {
+                            "target": 15,
+                            "current": 15
+                        }
+                    },
+                    "total": {
+                        "mobile": {
+                            "target": 1650,
+                            "current": 2000
+                        },
+                        "desktop": {
+                            "target": 1750,
+                            "current": 2000
+                        }
+                    }
+                },
+                "resource-requests": {
+                    "script": {
+                        "mobile": {
+                            "target": 20,
+                            "current": 25
+                        },
+                        "desktop": {
+                            "target": 20,
+                            "current": 25
+                        }
+                    },
+                    "stylesheet": {
+                        "mobile": {
+                            "target": 5,
+                            "current": 7
+                        },
+                        "desktop": {
+                            "target": 5,
+                            "current": 7
+                        }
+                    },
+                    "document": {
+                        "mobile": {
+                            "target": 3,
+                            "current": 3
+                        },
+                        "desktop": {
+                            "target": 3,
+                            "current": 3
+                        }
+                    },
+                    "font": {
+                        "mobile": {
+                            "target": 5,
+                            "current": 5
+                        },
+                        "desktop": {
+                            "target": 5,
+                            "current": 5
+                        }
+                    },
+                    "image": {
+                        "mobile": {
+                            "target": 25,
+                            "current": 30
+                        },
+                        "desktop": {
+                            "target": 25,
+                            "current": 30
+                        }
+                    },
+                    "media": {
+                        "mobile": {
+                            "target": 0,
+                            "current": 0
+                        },
+                        "desktop": {
+                            "target": 0,
+                            "current": 0
+                        }
+                    },
+                    "other": {
+                        "mobile": {
+                            "target": 25,
+                            "current": 25
+                        },
+                        "desktop": {
+                            "target": 30,
+                            "current": 30
+                        }
+                    },
+                    "total": {
+                        "mobile": {
+                            "target": 80,
+                            "current": 90
+                        },
+                        "desktop": {
+                            "target": 80,
+                            "current": 90
+                        }
+                    }
+                }
+            }
+        ],
+        "auditConfig": {
+            "mobile": {
+                "settings": {
+                    "throttling": {
+                        "rttMs": 150,
+                        "throughputKbps": 51200,
+                        "cpuSlowdownMultiplier": 1
+                    }
+                }
+            },
+            "desktop": {
+                "settings": {
+                    "throttling": {
+                        "rttMs": 100,
+                        "throughputKbps": 71680,
+                        "cpuSlowdownMultiplier": 1
+                    }
+                }
+            }
+        },
+        "browserConfig": {
+            "logLevel": "silent"
+        },
+        "reporterConfig": {
+            "reportPrefixName": "performance-report",
+            "reportOutputPath": "./.performance-reports",
+            "reportFormats": ["html"]
+        }
+    }
+}

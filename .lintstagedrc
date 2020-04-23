@@ -1,0 +1,3 @@
+{
+    "*.ts": ["yarn run lint-ts"]
+}
