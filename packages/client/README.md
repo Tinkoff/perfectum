@@ -20,7 +20,7 @@ Library for measuring client performance metrics :rocket:
 * [First Input Delay Duration](https://wicg.github.io/event-timing/)
 * [First Input Delay Start Time](https://wicg.github.io/event-timing/)
 * [First Input Delay Event Name](https://wicg.github.io/event-timing/)
-* [Long Tasks Total](https://w3c.github.io/longtasks/)
+* [Total Long Tasks](https://w3c.github.io/longtasks/)
 * [First Long Task Start Time](https://w3c.github.io/longtasks/)
 * [First Long Task Duration](https://w3c.github.io/longtasks/)
 * [Domain Lookup Time](https://w3c.github.io/navigation-timing/)
@@ -54,12 +54,18 @@ Perfectum.init({
 });
 ```
 
+By default, before the user closes the page (unload event), the Perfectum will send an object with the collected metrics to the address specified in the ***sendMetricsUrl*** property.
+
+If you need to add data to the resulting object with collected metrics, for example, the name of the application or the type of environment, you can specify the object with additional data in the ***sendMetricsData*** property.
+
+If you want to implement your own logic for sending the collected metrics, you can specify a callback in the ***sendMetricsCallback*** property that will be called before the user closes the page (unload event). When calling a callback, an [object](./src/performance/types.ts#L25) with collected metrics will be passed as an argument.
+
 ## Custom Metrics
 Custom metrics are the ability to measure the performance of individual elements on a page or the operations performed in your project. These metrics are necessary to provide the most accurate picture of how users perceive the performance of your application. There are two approaches to measuring custom metrics:
 
 **Measurement at the initialization stage of the application**
 
-At this stage, we may need to measure the appearance of the most important page elements on the user's screen, such as a hero image, cta button, lead form etc. For this type of measurement, you need to add the ***elementtiming*** attribute to the HTML element whose performance or time of appearance on the page you would like to measure.
+At this stage, we may need to measure the time of appearance of the most important page elements on the user's screen, such as a hero image, cta button, lead form etc. For this type of measurement, you need to add the ***elementtiming*** attribute to the HTML element whose performance or time of appearance on the page you would like to measure.
 
 ```javascript
 <h1 elementtiming="metric-name">Example App</h1>
@@ -67,7 +73,7 @@ At this stage, we may need to measure the appearance of the most important page 
 
 **Measurement at the stage of interaction with the application**
 
-At this stage, we may need to measure the performance of an important task, the time spent on a specific request, loading a resource, or user transitions between pages of the application. For this type of measurement, you need to use a special interface provided in the form of two static methods of the ***Perfectum*** class.
+At this stage, we may need to measure the performance of the priority task, the time spent on an important request, or the rendering of specific page components. For this type of measurement, you need to use the special interface provided in the form of two static methods, ***startMeasure*** and ***stopMeasure***.
 
 ```javascript
 import Perfectum from '@perfectum/client';
