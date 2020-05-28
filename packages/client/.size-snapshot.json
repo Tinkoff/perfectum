@@ -1,25 +1,25 @@
 {
   "lib/index.cjs.min.js": {
-    "bundled": 23222,
-    "minified": 12168,
-    "gzipped": 2795
+    "bundled": 23092,
+    "minified": 12082,
+    "gzipped": 2817
   },
   "lib/index.iife.min.js": {
-    "bundled": 25236,
-    "minified": 10000,
-    "gzipped": 2519
+    "bundled": 25098,
+    "minified": 9914,
+    "gzipped": 2535
   },
   "lib/index.es.min.js": {
-    "bundled": 23205,
-    "minified": 12155,
-    "gzipped": 2787,
+    "bundled": 23075,
+    "minified": 12069,
+    "gzipped": 2810,
     "treeshaked": {
       "rollup": {
-        "code": 7766,
+        "code": 7680,
         "import_statements": 0
       },
       "webpack": {
-        "code": 10889
+        "code": 10803
       }
     }
   }

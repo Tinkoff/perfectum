@@ -36,7 +36,7 @@ export default class Performance {
 
     private logger: Logger;
 
-    private performanceObserversForDisconnect: PerformanceObserver[] = [];
+    private observersForDisconnectAfterFirstInput: PerformanceObserver[] = [];
 
     constructor(logger: Logger) {
         this.logger = logger;
@@ -186,8 +186,8 @@ export default class Performance {
 
                 performanceObserver.disconnect();
 
-                // After the first interaction with the page, we disconnect all performance observers
-                this.disconnectPerformanceObservers();
+                // After the first interaction with the page, we disconnect some performance observers
+                this.disconnectObserversAfterFirstInput();
             });
 
             performanceObserver.observe({ type: EntryTypes.firstInput, buffered: true });
@@ -207,7 +207,6 @@ export default class Performance {
 
             performanceObserver.observe({ type: EntryTypes.largestContentfulPaint, buffered: true });
 
-            this.performanceObserversForDisconnect.push(performanceObserver);
         } catch (error) {
             this.logger.printError('Performance:initLargestContentfulPaintObserver', error);
         }
@@ -230,8 +229,6 @@ export default class Performance {
             });
 
             performanceObserver.observe({ type: EntryTypes.layoutShift, buffered: true });
-
-            this.performanceObserversForDisconnect.push(performanceObserver);
         } catch (error) {
             this.logger.printError('Performance:initLayoutShiftObserver', error);
         }
@@ -264,7 +261,7 @@ export default class Performance {
 
             performanceObserver.observe({ type: EntryTypes.longTask });
 
-            this.performanceObserversForDisconnect.push(performanceObserver);
+            this.observersForDisconnectAfterFirstInput.push(performanceObserver);
         } catch (error) {
             this.logger.printError('Performance:initLongTasksObserver', error);
         }
@@ -290,14 +287,14 @@ export default class Performance {
 
             performanceObserver.observe({ type: EntryTypes.element, buffered: true });
 
-            this.performanceObserversForDisconnect.push(performanceObserver);
+            this.observersForDisconnectAfterFirstInput.push(performanceObserver);
         } catch (error) {
             this.logger.printError('Performance:initElementTimingObserver', error);
         }
     }
 
-    private disconnectPerformanceObservers() {
-        this.performanceObserversForDisconnect.forEach(performanceObserver => {
+    private disconnectObserversAfterFirstInput() {
+        this.observersForDisconnectAfterFirstInput.forEach(performanceObserver => {
             performanceObserver.disconnect();
         });
     }

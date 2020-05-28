@@ -50,6 +50,7 @@ class Authenticator {
             throw new Error(`Authentication script path "${authenticationScriptPath}" does not exist`);
         }
 
+        // We use the ts-node to correctly load authentication script files with different extensions (.js, .ts) and module formats (ES, CommonJS)
         require('ts-node').register({ 
             skipProject: true,
             transpileOnly: true,
