@@ -160,6 +160,36 @@
                         "current": 1650
                     }
                 },
+                "largest-contentful-paint": {
+                    "mobile": {
+                        "target": 1850,
+                        "current": 2150
+                    },
+                    "desktop": {
+                        "target": 1550,
+                        "current": 1850
+                    }
+                },
+                "speed-index": {
+                    "mobile": {
+                        "target": 1950,
+                        "current": 2250
+                    },
+                    "desktop": {
+                        "target": 1650,
+                        "current": 1950
+                    }
+                },
+                "cumulative-layout-shift": {
+                    "mobile": {
+                        "target": 0.3,
+                        "current": 0.8
+                    },
+                    "desktop": {
+                        "target": 0.3,
+                        "current": 0.6
+                    }
+                },
                 "max-potential-fid": {
                     "mobile": {
                         "target": 115,
@@ -365,6 +395,36 @@
                     "desktop": {
                         "target": 2350,
                         "current": 2650
+                    }
+                },
+                "largest-contentful-paint": {
+                    "mobile": {
+                        "target": 2850,
+                        "current": 3150
+                    },
+                    "desktop": {
+                        "target": 2550,
+                        "current": 2850
+                    }
+                },
+                "speed-index": {
+                    "mobile": {
+                        "target": 2950,
+                        "current": 3250
+                    },
+                    "desktop": {
+                        "target": 2650,
+                        "current": 2950
+                    }
+                },
+                "cumulative-layout-shift": {
+                    "mobile": {
+                        "target": 0.3,
+                        "current": 0.8
+                    },
+                    "desktop": {
+                        "target": 0.3,
+                        "current": 0.6
                     }
                 },
                 "max-potential-fid": {
