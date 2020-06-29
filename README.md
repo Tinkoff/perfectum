@@ -6,6 +6,10 @@ A set of tools for working with project performance
 * [Perfectum Client](./packages/client)
 * [Perfectum Synthetic](./packages/synthetic)
 
+## Articles
+* [Client performance monitoring](https://habr.com/ru/company/tinkoff/blog/508256/)
+* [Synthetic performance monitoring](https://habr.com/ru/company/tinkoff/blog/508258/)
+
 ## Contributing
 1. Clone the Project
 2. Create your Branch (`git checkout -b feature/amazing-feature`)
