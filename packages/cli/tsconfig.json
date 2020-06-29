@@ -10,8 +10,9 @@
     "tsBuildInfoFile": "./lib/tsconfig.tsbuildinfo"
   },
   "exclude": [
+    "lib",
     "**/*.test.ts",
-    "lib"
+    "auth-script.ts"
   ],
   "references": [
     {
