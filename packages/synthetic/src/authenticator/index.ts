@@ -3,6 +3,7 @@ import path from 'path';
 import emoji from 'node-emoji';
 import puppeteer from 'puppeteer';
 import Logger from '../logger';
+import { TYPESCRIPT_FILE_EXTENSION } from './constants';
 import { AuthenticatorConfig, AuthenticationScript } from './types';
 
 class Authenticator {
@@ -50,17 +51,24 @@ class Authenticator {
             throw new Error(`Authentication script path "${authenticationScriptPath}" does not exist`);
         }
 
-        // We use the ts-node to correctly load authentication script files with different extensions (.js, .ts) and module formats (ES, CommonJS)
-        require('ts-node').register({ 
-            skipProject: true,
-            transpileOnly: true,
-            compilerOptions: {
-                allowJs: true,
-                module: 'CommonJS'
-            }
-        });
+        const authenticationScriptFileExtension = path.extname(absoluteAuthenticationScriptPath);
+
+        if (authenticationScriptFileExtension === TYPESCRIPT_FILE_EXTENSION) {
+            require('ts-node').register({ 
+                skipProject: true,
+                transpileOnly: true,
+                compilerOptions: {
+                    allowJs: true,
+                    module: 'CommonJS'
+                }
+            });
+        }
 
         this.authenticationScript = require(absoluteAuthenticationScriptPath).default;
+
+        if (this.authenticationScript === undefined) {
+            throw new Error('The contents of the authentication script file were not found. \n\nSee the examples of authentication script files in the repository of the project @perfectum/cli.');
+        }
     }
 }
 
