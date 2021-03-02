@@ -51,6 +51,7 @@ Perfectum.init({
 
     window.navigator.sendBeacon('http://example.com/metrics', data);
   },
+  maxPaintTime: 15000
 });
 ```
 
@@ -59,6 +60,8 @@ By default, before the user closes the page (unload event), the Perfectum will s
 If you need to add data to the resulting object with collected metrics, for example, the name of the application or the type of environment, you can specify the object with additional data in the ***sendMetricsData*** property.
 
 If you want to implement your own logic for sending the collected metrics, you can specify a callback in the ***sendMetricsCallback*** property that will be called before the user closes the page (unload event). When calling a callback, an [object](./src/performance/types.ts#L25) with collected metrics will be passed as an argument.
+
+If you want to filter paint performance metrics such as First Paint, First Contentful Paint, Largest Contentful Paint, you can set the ***maxPaintTime*** property(in milliseconds). By default, it is set to 60 seconds.
 
 ## Custom Metrics
 Custom metrics are the ability to measure the performance of individual elements on a page or the operations performed in your project. These metrics are necessary to provide the most accurate picture of how users perceive the performance of your application. There are two approaches to measuring custom metrics:

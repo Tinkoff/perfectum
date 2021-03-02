@@ -129,3 +129,7 @@ export type ElementPerformanceEntry = PerformanceEntry & {
 };
 
 export type NavigationTimingsPerformanceEntry = PerformanceNavigationTiming;
+
+export type PerformanceServiceConfig = {
+    maxPaintTime: number;
+};
