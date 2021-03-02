@@ -1,6 +1,6 @@
 {
   "name": "@perfectum/client",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Library for measuring client performance metrics",
   "author": "Zakharov Vladislav <wwzakharow@gmail.com>",
   "license": "Apache-2.0",
