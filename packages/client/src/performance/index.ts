@@ -15,7 +15,8 @@ import {
     NetworkInformationMetricNames,
     FirstInputDelayPerformanceEntry,
     NavigatorWithConnectionProperty,
-    NavigationTimingsPerformanceEntry
+    NavigationTimingsPerformanceEntry,
+    PerformanceServiceConfig,
 } from './types';
 import { isMobileDevice } from './utils';
 import { DEFAULT_OBSERVED_ENTRY_TYPES } from './constants';
@@ -34,11 +35,13 @@ export default class Performance {
         [Metrics.largestContentfulPaint]: null
     };
 
+    private config: PerformanceServiceConfig;
     private logger: Logger;
 
     private observersForDisconnectAfterFirstInput: PerformanceObserver[] = [];
 
-    constructor(logger: Logger) {
+    constructor(config: PerformanceServiceConfig, logger: Logger) {
+        this.config = config;
         this.logger = logger;
     }
 
@@ -140,7 +143,9 @@ export default class Performance {
 
                 performanceEntries.forEach(performanceEntry => {
                     if (performanceEntry.name === Metrics.firstPaint) {
-                        this.metrics[Metrics.firstPaint] = performanceEntry.startTime;
+                        if(this.isPaintMetricValueValid(performanceEntry.startTime)) {
+                            this.metrics[Metrics.firstPaint] = performanceEntry.startTime;
+                        }
 
                         performanceObserver.disconnect();
                     }
@@ -160,7 +165,9 @@ export default class Performance {
 
                 performanceEntries.forEach(performanceEntry => {
                     if (performanceEntry.name === Metrics.firstContentfulPaint) {
-                        this.metrics[Metrics.firstContentfulPaint] = performanceEntry.startTime;
+                        if(this.isPaintMetricValueValid(performanceEntry.startTime)) {
+                            this.metrics[Metrics.firstContentfulPaint] = performanceEntry.startTime;
+                        }
 
                         performanceObserver.disconnect();
                     }
@@ -202,7 +209,9 @@ export default class Performance {
                 const performanceEntries = performanceEntryList.getEntries();
                 const performanceEntry = performanceEntries[performanceEntries.length - 1];
 
-                this.metrics[Metrics.largestContentfulPaint] = performanceEntry.startTime;
+                if(this.isPaintMetricValueValid(performanceEntry.startTime)) {
+                    this.metrics[Metrics.largestContentfulPaint] = performanceEntry.startTime;
+                }
             });
 
             performanceObserver.observe({ type: EntryTypes.largestContentfulPaint, buffered: true });
@@ -307,6 +316,10 @@ export default class Performance {
         return supportedEntryTypes
             ? DEFAULT_OBSERVED_ENTRY_TYPES.filter(entryType => supportedEntryTypes.indexOf(entryType) !== -1) // eslint-disable-line @typescript-eslint/prefer-includes
             : DEFAULT_OBSERVED_ENTRY_TYPES;
+    }
+
+    private isPaintMetricValueValid(value: number): boolean {
+        return value >= 0 && value <= this.config.maxPaintTime;
     }
 
     public startPerformanceMeasure(markName: string) {
