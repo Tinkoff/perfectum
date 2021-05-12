@@ -24,7 +24,7 @@ describe('PerfectumClient', () => {
         jest.resetModules();
         // https://github.com/facebook/jest/issues/3236
         // https://github.com/facebook/jest/issues/9430
-        (PerfectumClient as any).isInitialized = undefined; 
+        (PerfectumClient as any).isInitialized = undefined;
         (PerfectumClient as any).isSupportedEnvironment = undefined;
     });
 
@@ -56,7 +56,8 @@ describe('PerfectumClient', () => {
 
             PerfectumClient.init(config);
 
-            window.dispatchEvent(new Event('unload'));
+            (window.document as any).visibilityState = 'hidden';
+            window.dispatchEvent(new Event('visibilitychange'));
 
             expect((PerfectumClient as any).isInitialized).toEqual(true);
             expect(sendBeacon).toHaveBeenCalledWith(SEND_METRICS_URL, DATA);
@@ -77,8 +78,8 @@ describe('PerfectumClient', () => {
 
             PerfectumClient.init(config);
 
-            window.dispatchEvent(new Event('unload'));
-
+            (window.document as any).visibilityState = 'hidden';
+            window.dispatchEvent(new Event('visibilitychange'));
             expect((PerfectumClient as any).isInitialized).toEqual(true);
             expect(sendBeacon).toHaveBeenCalledWith(SEND_METRICS_URL, DATA);
         });

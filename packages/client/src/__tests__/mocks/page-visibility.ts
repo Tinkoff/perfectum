@@ -5,4 +5,11 @@ export const mockPageVisibility = () => {
         configurable: true,
         value: false
     });
+
+    Object.defineProperty(window.document, "visibilityState", {
+        writable: true,
+        enumerable: true,
+        configurable: true,
+        value: "visible"
+    });
 }

@@ -66,11 +66,11 @@ export default class Performance {
             return;
         }
 
-        this.metrics[Metrics.networkInformation] = {
+        this.setMetric(Metrics.networkInformation, {
             [NetworkInformationMetricNames.roundTripTime]: connection.rtt,
             [NetworkInformationMetricNames.downlinkBandwidth]: connection.downlink,
             [NetworkInformationMetricNames.effectiveConnectionType]: connection.effectiveType
-        };
+        });
     }
 
     private initPerformanceObservers() {
@@ -120,12 +120,12 @@ export default class Performance {
                     domainLookupStart
                 } = performanceEntry;
 
-                this.metrics[Metrics.navigationTimings] = {
+                this.setMetric(Metrics.navigationTimings, {
                     [NavigationTimingsMetricNames.domainLookupTime]: domainLookupEnd - domainLookupStart,
                     [NavigationTimingsMetricNames.serverResponseTime]: responseStart - requestStart,
                     [NavigationTimingsMetricNames.serverConnectionTime]: connectEnd - connectStart,
                     [NavigationTimingsMetricNames.downloadDocumentTime]: responseEnd - startTime
-                };
+                });
 
                 performanceObserver.disconnect();
             });
@@ -144,7 +144,7 @@ export default class Performance {
                 performanceEntries.forEach(performanceEntry => {
                     if (performanceEntry.name === Metrics.firstPaint) {
                         if(this.isPaintMetricValueValid(performanceEntry.startTime)) {
-                            this.metrics[Metrics.firstPaint] = performanceEntry.startTime;
+                            this.setMetric(Metrics.firstPaint, performanceEntry.startTime);
                         }
 
                         performanceObserver.disconnect();
@@ -166,7 +166,7 @@ export default class Performance {
                 performanceEntries.forEach(performanceEntry => {
                     if (performanceEntry.name === Metrics.firstContentfulPaint) {
                         if(this.isPaintMetricValueValid(performanceEntry.startTime)) {
-                            this.metrics[Metrics.firstContentfulPaint] = performanceEntry.startTime;
+                            this.setMetric(Metrics.firstContentfulPaint, performanceEntry.startTime);
                         }
 
                         performanceObserver.disconnect();
@@ -185,11 +185,11 @@ export default class Performance {
             const performanceObserver = new PerformanceObserver((performanceEntryList: PerformanceObserverEntryList) => {
                 const performanceEntry = performanceEntryList.getEntries()[0] as FirstInputDelayPerformanceEntry;
 
-                this.metrics[Metrics.firstInputDelay] = {
+                this.setMetric(Metrics.firstInputDelay, {
                     [FirstInputDelayMetricNames.eventName]: performanceEntry.name,
                     [FirstInputDelayMetricNames.startTime]: performanceEntry.startTime,
                     [FirstInputDelayMetricNames.duration]: performanceEntry.processingStart - performanceEntry.startTime
-                };
+                });
 
                 performanceObserver.disconnect();
 
@@ -210,7 +210,7 @@ export default class Performance {
                 const performanceEntry = performanceEntries[performanceEntries.length - 1];
 
                 if(this.isPaintMetricValueValid(performanceEntry.startTime)) {
-                    this.metrics[Metrics.largestContentfulPaint] = performanceEntry.startTime;
+                    this.setMetric(Metrics.largestContentfulPaint, performanceEntry.startTime);
                 }
             });
 
@@ -229,12 +229,15 @@ export default class Performance {
 
             const performanceObserver = new PerformanceObserver((performanceEntryList: PerformanceObserverEntryList) => {
                 const performanceEntries = performanceEntryList.getEntries() as LayoutShiftPerformanceEntry[];
+                let totalShift = this.metrics[Metrics.cumulativeLayoutShift] || 0;
 
                 performanceEntries.forEach((performanceEntry) => {
                     if (!performanceEntry.hadRecentInput) {
-                        this.metrics[Metrics.cumulativeLayoutShift]! += performanceEntry.value; // eslint-disable-line @typescript-eslint/no-non-null-assertion
+                        totalShift += performanceEntry.value;
                     }
-                })
+                });
+
+                this.setMetric(Metrics.cumulativeLayoutShift, totalShift);
             });
 
             performanceObserver.observe({ type: EntryTypes.layoutShift, buffered: true });
@@ -266,6 +269,8 @@ export default class Performance {
                     longTasksMetricStore[LongTasksMetricNames.firstLongTaskDuration] = firstPerformanceEntry.duration;
                     longTasksMetricStore[LongTasksMetricNames.firstLongTaskStartTime] = firstPerformanceEntry.startTime;
                 }
+
+                this.setMetric(Metrics.longTasks, longTasksMetricStore);
             });
 
             performanceObserver.observe({ type: EntryTypes.longTask });
@@ -322,6 +327,12 @@ export default class Performance {
         return value >= 0 && value <= this.config.maxPaintTime;
     }
 
+    private setMetric<T extends Metrics>(metric: T, metricValue: MetricsStore[T]) {
+        this.metrics[metric] = metricValue;
+
+        this.config.onMetricCallback && this.config.onMetricCallback(metric, metricValue, this.metrics);
+    }
+
     public startPerformanceMeasure(markName: string) {
         try {
             if (this.metrics[Metrics.customMetrics] === null) {
@@ -358,6 +369,8 @@ export default class Performance {
                         customMetricsStore[markName] = performanceEntry.duration;
                     }
                 })
+
+                this.setMetric(Metrics.customMetrics, customMetricsStore);
             }
         } catch (error) {
             this.logger.printError('Performance:stopMeasure', error);

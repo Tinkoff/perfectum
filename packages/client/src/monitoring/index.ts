@@ -12,26 +12,40 @@ export default class MonitoringService {
     }
 
     public init(metrics: MetricsStore) {
+        if('visibilityState' in document) {
+            window.addEventListener(
+                'visibilitychange',
+                () => document.visibilityState === 'hidden' && this.sendMetricsHandler(metrics),
+                false
+            );
+        } else {
+            window.addEventListener(
+                'pagehide',
+                () => this.sendMetricsHandler(metrics),
+                false
+            );
+        }
+    }
+
+    private sendMetricsHandler(metrics: MetricsStore) {
         const {
             sendMetricsUrl,
             sendMetricsData,
             sendMetricsCallback
         } = this.config;
 
-        window.addEventListener('unload', () => {
-            try {
-                if (sendMetricsCallback) {
-                    sendMetricsCallback(metrics);
-                    return;
-                }
-
-                if (sendMetricsUrl) {
-                    this.sendMetrics(metrics, sendMetricsUrl, sendMetricsData);
-                }
-            } catch (error) {
-                this.logger.printError('Monitoring.init', error);
+        try {
+            if (sendMetricsCallback) {
+                sendMetricsCallback(metrics);
+                return;
             }
-        }, false);
+
+            if (sendMetricsUrl) {
+                this.sendMetrics(metrics, sendMetricsUrl, sendMetricsData);
+            }
+        } catch (error) {
+            this.logger.printError('Monitoring.init', error);
+        }
     }
 
     private sendMetrics(
