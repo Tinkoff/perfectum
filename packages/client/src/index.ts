@@ -27,11 +27,12 @@ export default class PerfectumClient {
                 sendMetricsUrl,
                 sendMetricsData,
                 sendMetricsCallback,
+                onMetricCallback,
                 maxPaintTime = 60000,
             } = config || {};
 
             this.logger = new Logger({ logging });
-            this.performance = new Performance({maxPaintTime}, this.logger);
+            this.performance = new Performance({maxPaintTime, onMetricCallback}, this.logger);
 
             this.performance.init();
 

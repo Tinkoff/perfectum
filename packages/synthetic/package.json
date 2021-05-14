@@ -1,6 +1,6 @@
 {
   "name": "@perfectum/synthetic",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Library for measuring synthetic performance metrics",
   "author": "Zakharov Vladislav <wwzakharow@gmail.com>",
   "license": "Apache-2.0",

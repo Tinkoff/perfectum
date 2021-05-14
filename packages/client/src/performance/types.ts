@@ -132,4 +132,5 @@ export type NavigationTimingsPerformanceEntry = PerformanceNavigationTiming;
 
 export type PerformanceServiceConfig = {
     maxPaintTime: number;
+    onMetricCallback?: <T extends Metrics>(metric: T, metricValue: MetricsStore[T], allMetrics: MetricsStore) => void;
 };
