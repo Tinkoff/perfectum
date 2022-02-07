@@ -55,13 +55,15 @@ type DeviceInformationMetricStore = {
 export enum NetworkInformationMetricNames {
     roundTripTime = 'round-trip-time',
     downlinkBandwidth = 'downlink-bandwidth',
-    effectiveConnectionType = 'effective-connection-type'
+    effectiveConnectionType = 'effective-connection-type',
+    saveData = 'save-data'
 }
 
 type NetworkInformationMetricStore = {
     [NetworkInformationMetricNames.roundTripTime]: number;
     [NetworkInformationMetricNames.downlinkBandwidth]: number;
     [NetworkInformationMetricNames.effectiveConnectionType]: string;
+    [NetworkInformationMetricNames.saveData]: boolean;
 };
 
 type ConnectionProperty = {

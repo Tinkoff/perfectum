@@ -69,7 +69,8 @@ export default class Performance {
         this.setMetric(Metrics.networkInformation, {
             [NetworkInformationMetricNames.roundTripTime]: connection.rtt,
             [NetworkInformationMetricNames.downlinkBandwidth]: connection.downlink,
-            [NetworkInformationMetricNames.effectiveConnectionType]: connection.effectiveType
+            [NetworkInformationMetricNames.effectiveConnectionType]: connection.effectiveType,
+            [NetworkInformationMetricNames.saveData]: connection.saveData
         });
     }
 
