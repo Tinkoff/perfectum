@@ -63,13 +63,14 @@ type NetworkInformationMetricStore = {
     [NetworkInformationMetricNames.roundTripTime]: number;
     [NetworkInformationMetricNames.downlinkBandwidth]: number;
     [NetworkInformationMetricNames.effectiveConnectionType]: string;
-    [NetworkInformationMetricNames.saveData]: boolean;
+    [NetworkInformationMetricNames.saveData]: boolean | undefined;
 };
 
 type ConnectionProperty = {
     rtt: number;
     downlink: number;
     effectiveType: string;
+    saveData?: boolean;
 }
 
 export type NavigatorWithConnectionProperty = Navigator & {
