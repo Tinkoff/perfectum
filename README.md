@@ -1,4 +1,9 @@
+**⛔️ DEPRECATED ⛔️**
+
+This project is no longer supported, please consider using [perfume.js](https://zizzamia.github.io/perfume/) library instead for client performance monitoring.
+
 # Perfectum
+
 A set of tools for working with project performance
 
 ## Projects
